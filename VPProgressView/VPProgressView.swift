@@ -10,10 +10,30 @@ import UIKit
 
 private typealias VPPrivateFunctions = VPProgressView
 
+@objc protocol VPProgressViewProtocol : class {
+    /// Called when progressView is about to begin animation
+    optional func willBeginProgress()
+    
+    /// Called when progressView has completed the animation
+    optional func didEndProgress()
+}
+
 class VPProgressView: UIView {
+    
+    /// Defines the color for progressView. Defaults to blackColor.
+    var progressColor : UIColor = UIColor.blackColor() {
+        didSet {
+            if let _ = progressView {
+                progressView.backgroundColor = progressColor
+            }
+        }
+    }
     
     /// Defines the duration for animation. This will not have effect if in moveProgressView(_:, _:) animated is set to false. Defaults to 0.5
     var animationDuration = 0.5
+    
+    /// Delegate for handling progressView animation
+    weak var delegate : VPProgressViewProtocol?
     
     // progressView Instance
     private var progressView : UIView!
@@ -60,7 +80,7 @@ extension VPPrivateFunctions {
     // Add the progressView to the view
     private func initProgressView() {
         progressView = UIView(frame: CGRectZero)
-        progressView.backgroundColor = UIColor.blackColor()
+        progressView.backgroundColor = progressColor
         
         self.addSubview(progressView)
         
@@ -89,14 +109,20 @@ extension VPPrivateFunctions {
     
     // Helper function for moving the progressView with animation
     private func moveProgressView(percentage : CGFloat, animated : Bool) {
+        delegate?.willBeginProgress?()
+        
         if animated {
-            UIView.animateWithDuration(animationDuration, animations: {
+            UIView.animateWithDuration(animationDuration, animations: { 
                 self.moveProgressViewWidth(byPercentage: percentage)
                 self.layoutIfNeeded()
+                }, completion: { (success) in
+                    self.delegate?.didEndProgress?()
             })
         }
         else {
             moveProgressViewWidth(byPercentage: percentage)
+            
+            delegate?.didEndProgress?()
         }
     }
     

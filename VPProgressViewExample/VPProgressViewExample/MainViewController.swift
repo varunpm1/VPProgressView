@@ -16,6 +16,9 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        self.progressView.delegate = self
+        self.progressView.progressColor = UIColor.redColor()
+        self.progressView.animationDuration = 0.7
         
         for i in 0.stride(to: 10, by: 1) {
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64((1 + Double(i)) * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) {
@@ -27,5 +30,15 @@ class MainViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+}
+
+extension MainViewController : VPProgressViewProtocol {
+    func willBeginProgress() {
+        print("Animation will begin")
+    }
+    
+    func didEndProgress() {
+        print("Animation ended")
     }
 }
