@@ -12,6 +12,7 @@
 		8B8507931D4F39F400F4DF77 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8B8507921D4F39F400F4DF77 /* Assets.xcassets */; };
 		8B8507961D4F39F400F4DF77 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B8507941D4F39F400F4DF77 /* LaunchScreen.storyboard */; };
 		8B85079E1D4F3A5700F4DF77 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B85079D1D4F3A5700F4DF77 /* MainViewController.swift */; };
+		8B8507A21D4F3B7900F4DF77 /* VPProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8507A11D4F3B7900F4DF77 /* VPProgressView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		8B8507951D4F39F400F4DF77 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8B8507971D4F39F400F4DF77 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8B85079D1D4F3A5700F4DF77 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		8B8507A11D4F3B7900F4DF77 /* VPProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VPProgressView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,12 +58,22 @@
 			children = (
 				8B85078B1D4F39F400F4DF77 /* AppDelegate.swift */,
 				8B85079D1D4F3A5700F4DF77 /* MainViewController.swift */,
+				8B8507A01D4F3B6600F4DF77 /* VPProgressView */,
 				8B85078F1D4F39F400F4DF77 /* Main.storyboard */,
 				8B8507921D4F39F400F4DF77 /* Assets.xcassets */,
 				8B8507941D4F39F400F4DF77 /* LaunchScreen.storyboard */,
 				8B8507971D4F39F400F4DF77 /* Info.plist */,
 			);
 			path = VPProgressViewExample;
+			sourceTree = "<group>";
+		};
+		8B8507A01D4F3B6600F4DF77 /* VPProgressView */ = {
+			isa = PBXGroup;
+			children = (
+				8B8507A11D4F3B7900F4DF77 /* VPProgressView.swift */,
+			);
+			name = VPProgressView;
+			path = ../../VPProgressView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,6 +149,7 @@
 			files = (
 				8B85078C1D4F39F400F4DF77 /* AppDelegate.swift in Sources */,
 				8B85079E1D4F3A5700F4DF77 /* MainViewController.swift in Sources */,
+				8B8507A21D4F3B7900F4DF77 /* VPProgressView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -249,7 +262,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
 				INFOPLIST_FILE = VPProgressViewExample/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.vpm.VPProgressViewExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -260,7 +275,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
 				INFOPLIST_FILE = VPProgressViewExample/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.vpm.VPProgressViewExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";

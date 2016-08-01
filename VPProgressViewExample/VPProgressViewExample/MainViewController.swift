@@ -9,11 +9,19 @@
 import UIKit
 
 class MainViewController: UIViewController {
-
+    
+    @IBOutlet weak var progressView: VPProgressView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        for i in 0.stride(to: 10, by: 1) {
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64((1 + Double(i)) * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) {
+                self.progressView.moveProgressView(byPercentageCompletion: CGFloat(i + 1) * 10, animated: true)
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {
