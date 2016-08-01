@@ -41,15 +41,7 @@ class VPProgressView: UIView {
     /// Sets the progressView by the given percentage. The percentage should be in between 0 and 100. If not, nothing will happen.
     func setProgressViewCompletion(withPercentageCompletion percentage : CGFloat, animated : Bool) {
         if isTargetPercentageValueInRange(forPercentage: percentage, isAdding: false) {
-            if animated {
-                UIView.animateWithDuration(animationDuration, animations: {
-                    self.moveProgressViewWidth(byPercentage: percentage)
-                    self.layoutIfNeeded()
-                })
-            }
-            else {
-                moveProgressViewWidth(byPercentage: percentage)
-            }
+            moveProgressView(percentage, animated: animated)
         }
     }
     
@@ -58,20 +50,12 @@ class VPProgressView: UIView {
     /// 0 <= (`percentageCompletion` + `byPercentage`) <= 100
     func moveProgressView(byPercentageCompletion byPercentage : CGFloat, animated : Bool) {
         if isTargetPercentageValueInRange(forPercentage: byPercentage, isAdding: true) {
-            if animated {
-                UIView.animateWithDuration(animationDuration, animations: {
-                    self.moveProgressViewWidth(byPercentage: byPercentage + self.percentageCompletion)
-                    self.layoutIfNeeded()
-                })
-            }
-            else {
-                moveProgressViewWidth(byPercentage: byPercentage + percentageCompletion)
-            }
+            moveProgressView(byPercentage + percentageCompletion, animated: animated)
         }
     }
 }
 
-private extension VPPrivateFunctions {
+extension VPPrivateFunctions {
     //MARK: Private Helper functions
     // Add the progressView to the view
     private func initProgressView() {
@@ -101,6 +85,19 @@ private extension VPPrivateFunctions {
     private func moveProgressViewWidth(byPercentage percentage : CGFloat) {
         // Convert the percentage to the needed width
         progressViewWidthConstraint.constant = (self.bounds.size.width * percentage) / 100
+    }
+    
+    // Helper function for moving the progressView with animation
+    private func moveProgressView(percentage : CGFloat, animated : Bool) {
+        if animated {
+            UIView.animateWithDuration(animationDuration, animations: {
+                self.moveProgressViewWidth(byPercentage: percentage)
+                self.layoutIfNeeded()
+            })
+        }
+        else {
+            moveProgressViewWidth(byPercentage: percentage)
+        }
     }
     
     // Check if the target percentage of progressView is within valid range
