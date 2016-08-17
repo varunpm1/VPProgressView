@@ -2,7 +2,7 @@
 //  MainViewController.swift
 //  VPProgressViewExample
 //
-//  Created by Varun on 01/08/16.
+//  Created by Varun P M on 01/08/16.
 //  Copyright © 2016 VPM. All rights reserved.
 //
 
@@ -10,11 +10,11 @@ import UIKit
 
 class MainViewController: UIViewController {
     
-    @IBOutlet weak var progressView: VPProgressView!
+    @IBOutlet weak var progressView: VPBarProgressView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
         self.progressView.delegate = self
         self.progressView.progressColor = UIColor.redColor()

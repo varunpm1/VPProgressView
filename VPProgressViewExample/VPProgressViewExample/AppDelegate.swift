@@ -2,7 +2,7 @@
 //  AppDelegate.swift
 //  VPProgressViewExample
 //
-//  Created by Varun on 01/08/16.
+//  Created by Varun P M on 01/08/16.
 //  Copyright © 2016 VPM. All rights reserved.
 //
 

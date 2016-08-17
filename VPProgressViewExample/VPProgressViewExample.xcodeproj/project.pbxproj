@@ -13,6 +13,7 @@
 		8B8507961D4F39F400F4DF77 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B8507941D4F39F400F4DF77 /* LaunchScreen.storyboard */; };
 		8B85079E1D4F3A5700F4DF77 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B85079D1D4F3A5700F4DF77 /* MainViewController.swift */; };
 		8B8507A21D4F3B7900F4DF77 /* VPProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8507A11D4F3B7900F4DF77 /* VPProgressView.swift */; };
+		96351A9A1D64D7CC009851E1 /* VPBarProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96351A991D64D7CC009851E1 /* VPBarProgressView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		8B8507971D4F39F400F4DF77 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8B85079D1D4F3A5700F4DF77 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		8B8507A11D4F3B7900F4DF77 /* VPProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VPProgressView.swift; sourceTree = "<group>"; };
+		96351A991D64D7CC009851E1 /* VPBarProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VPBarProgressView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +73,7 @@
 			isa = PBXGroup;
 			children = (
 				8B8507A11D4F3B7900F4DF77 /* VPProgressView.swift */,
+				96351A991D64D7CC009851E1 /* VPBarProgressView.swift */,
 			);
 			name = VPProgressView;
 			path = ../../VPProgressView;
@@ -148,6 +151,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8B85078C1D4F39F400F4DF77 /* AppDelegate.swift in Sources */,
+				96351A9A1D64D7CC009851E1 /* VPBarProgressView.swift in Sources */,
 				8B85079E1D4F3A5700F4DF77 /* MainViewController.swift in Sources */,
 				8B8507A21D4F3B7900F4DF77 /* VPProgressView.swift in Sources */,
 			);
@@ -303,6 +307,7 @@
 				8B85079C1D4F39F400F4DF77 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
