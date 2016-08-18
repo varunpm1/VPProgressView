@@ -19,6 +19,9 @@ class MainViewController: UIViewController {
         self.progressView.delegate = self
         self.progressView.progressColor = UIColor.redColor()
         self.progressView.animationDuration = 0.7
+        self.progressView.needsRoundedEdges = true
+        self.progressView.roundedCornerWidth = 7
+        
         
         for i in 0.stride(to: 10, by: 1) {
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64((1 + Double(i)) * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) {

@@ -11,6 +11,23 @@ import UIKit
 private typealias VPPrivateFunctions = VPBarProgressView
 
 class VPBarProgressView: VPProgressView {
+    /// Bool that is used if rounded corned is needed or not. Defaults to true
+    var needsRoundedEdges = true {
+        didSet {
+            if needsRoundedEdges {
+                addRoundedCorner()
+            }
+        }
+    }
+    
+    /// Used if `needsRoundedEdges` is set to `true`. Used for specifying the corner radius of progressView. Defaults to 5
+    var roundedCornerWidth : CGFloat = 5 {
+        didSet {
+            if needsRoundedEdges {
+                addRoundedCorner()
+            }
+        }
+    }
     
     // progressView Instance
     private var progressView : UIView!
@@ -43,7 +60,7 @@ class VPBarProgressView: VPProgressView {
         progressViewWidthConstraint.constant = (self.bounds.size.width * percentage) / 100
     }
     
-    /// Helper function for moving the progressView with animation
+    /// Helper function for moving the progressView with or without animation
     override func moveProgressView(percentage : CGFloat, animated : Bool) {
         delegate?.willBeginProgress?()
         
@@ -87,5 +104,11 @@ extension VPPrivateFunctions {
         progressView.addConstraint(progressViewWidthConstraint)
         
         self.addConstraints([leadingConstraint, topConstraint, bottomConstraint])
+    }
+    
+    // Add the rounded corner radius if needed
+    private func addRoundedCorner() {
+        self.layer.cornerRadius = roundedCornerWidth
+        self.layer.masksToBounds = true
     }
 }

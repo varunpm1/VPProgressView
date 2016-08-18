@@ -51,26 +51,13 @@ class VPProgressView: UIView {
         }
     }
     
-    /// Move the progressView by the given percentage. Unlike the `moveProgressView(withPercentageCompletion percentage : CGFloat, animated : Bool)`, this moves by given percentage, whereas the former method sets the progress given percentage. The `byPercentage` should be such that the
+    /// Move the progressView by the given percentage. Unlike the `setProgressViewCompletion(withPercentageCompletion percentage : CGFloat, animated : Bool)`, this moves by given percentage, whereas the former method sets the progress given percentage. The `byPercentage` should be such that
     ///
     /// 0 <= (`percentageCompletion` + `byPercentage`) <= 100
     func moveProgressView(byPercentageCompletion byPercentage : CGFloat, animated : Bool) {
         if isTargetPercentageValueInRange(forPercentage: byPercentage, isAdding: true) {
             moveProgressView(byPercentage + percentageCompletion, animated: animated)
         }
-    }
-    
-    /// Overrided public functions
-    func setProgressViewColor() {
-        // Do nothing
-    }
-    
-    func moveProgressViewWidth(byPercentage percentage : CGFloat) {
-        // Do nothing
-    }
-    
-    func moveProgressView(percentage : CGFloat, animated : Bool) {
-        // Do nothing
     }
     
     //MARK: Private functions
@@ -86,5 +73,21 @@ class VPProgressView: UIView {
         }
         
         return (targetPercentage >= 0 && targetPercentage <= 100)
+    }
+}
+
+//MARK: Overridable functions to be overridden only bu subclasses. Do not call this method directly unless subclassed.
+extension VPProgressView {
+    /// Overrided public functions
+    func setProgressViewColor() {
+        // Do nothing
+    }
+    
+    func moveProgressViewWidth(byPercentage percentage : CGFloat) {
+        // Do nothing
+    }
+    
+    func moveProgressView(percentage : CGFloat, animated : Bool) {
+        // Do nothing
     }
 }
