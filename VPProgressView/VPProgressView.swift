@@ -17,6 +17,12 @@ import UIKit
 }
 
 class VPProgressView: UIView {
+    /// Defines the color for progressView. Defaults to whiteColor.
+    var progressContainerColor : UIColor = UIColor.whiteColor() {
+        didSet {
+            setProgressContainerViewColor()
+        }
+    }
     
     /// Defines the color for progressView. Defaults to blackColor.
     var progressColor : UIColor = UIColor.blackColor() {
@@ -79,6 +85,10 @@ class VPProgressView: UIView {
 //MARK: Overridable functions to be overridden only bu subclasses. Do not call this method directly unless subclassed.
 extension VPProgressView {
     /// Overrided public functions
+    func setProgressContainerViewColor() {
+        // Do nothing
+    }
+    
     func setProgressViewColor() {
         // Do nothing
     }

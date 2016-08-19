@@ -29,11 +29,24 @@ class VPBarProgressView: VPProgressView {
         }
     }
     
+    /// Optional label for displaying the percentage completion. Defaults to nil.
+    var progressLabel : UILabel? {
+        didSet {
+            addProgressLabel()
+        }
+    }
+    
+    // prgressView containerView
+    private var progressContainerView : UIView!
+    
     // progressView Instance
     private var progressView : UIView!
     
     // Width constraint to move the progressView
     private var progressViewWidthConstraint : NSLayoutConstraint!
+    
+    // Padding of progressContainerView w.r.t to self.
+    private var progressbarPadding : CGFloat = 10
     
     // Initializers
     override init(frame: CGRect) {
@@ -48,16 +61,19 @@ class VPBarProgressView: VPProgressView {
         initProgressView()
     }
     
+    /// Set the progressViewColor and containerViewColor
     override func setProgressViewColor() {
-        if let _ = progressView {
-            progressView.backgroundColor = progressColor
-        }
+        progressView.backgroundColor = progressColor
+    }
+    
+    override func setProgressContainerViewColor() {
+        progressContainerView.backgroundColor = progressContainerColor
     }
     
     /// Change the widthConstraint to indicate the movement of progressView
     override func moveProgressViewWidth(byPercentage percentage : CGFloat) {
         // Convert the percentage to the needed width
-        progressViewWidthConstraint.constant = (self.bounds.size.width * percentage) / 100
+        progressViewWidthConstraint.constant = (progressContainerView.bounds.size.width * percentage) / 100
     }
     
     /// Helper function for moving the progressView with or without animation
@@ -84,31 +100,61 @@ extension VPPrivateFunctions {
     //MARK: Private Helper functions
     // Add the progressView to the view
     private func initProgressView() {
+        progressContainerView = UIView(frame: CGRectZero)
+        progressContainerView.backgroundColor = progressContainerColor
+        
         progressView = UIView(frame: CGRectZero)
         progressView.backgroundColor = progressColor
         
-        self.addSubview(progressView)
+        addSubview(progressContainerView)
+        progressContainerView.addSubview(progressView)
         
-        addConstraintsForProgressView()
+        addFourSidedConstraintsForView(progressContainerView, parentView: self)
+        addConstraintForProgressView()
+        
+        self.backgroundColor = UIColor.clearColor()
     }
     
-    // Add the necessary constraints for the progressView
-    private func addConstraintsForProgressView() {
+    // Add the progressLabel
+    private func addProgressLabel() {
+        if let progressLabel = progressLabel {
+            progressLabel.frame = CGRect(x: 0, y: CGRectGetMaxY(progressView.frame), width: progressLabel.frame.size.width, height: progressLabel.frame.size.height)
+            
+            self.addSubview(progressLabel)
+        }
+    }
+    
+    // Add the necessary constraints for the progressView and containerView
+    private func addFourSidedConstraintsForView(view : UIView, parentView : UIView) {
+        view.translatesAutoresizingMaskIntoConstraints = false
+        
+        let leadingConstraint = NSLayoutConstraint(item: view, attribute: .Leading, relatedBy: .Equal, toItem: parentView, attribute: .Leading, multiplier: 1.0, constant: progressbarPadding)
+        let topConstraint = NSLayoutConstraint(item: view, attribute: .Top, relatedBy: .Equal, toItem: parentView, attribute: .Top, multiplier: 1.0, constant: progressbarPadding)
+        let trailingConstraint = NSLayoutConstraint(item: view, attribute: .Trailing, relatedBy: .Equal, toItem: parentView, attribute: .Trailing, multiplier: 1.0, constant: -progressbarPadding)
+        let bottomConstraint = NSLayoutConstraint(item: view, attribute: .Bottom, relatedBy: .Equal, toItem: parentView, attribute: .Bottom, multiplier: 1.0, constant: -progressbarPadding)
+        
+        self.addConstraints([leadingConstraint, topConstraint, trailingConstraint, bottomConstraint])
+    }
+    
+    private func addConstraintForProgressView() {
         progressView.translatesAutoresizingMaskIntoConstraints = false
         
-        let leadingConstraint = NSLayoutConstraint(item: progressView, attribute: .Leading, relatedBy: .Equal, toItem: self, attribute: .Leading, multiplier: 1.0, constant: 0.0)
-        let topConstraint = NSLayoutConstraint(item: progressView, attribute: .Top, relatedBy: .Equal, toItem: self, attribute: .Top, multiplier: 1.0, constant: 0.0)
-        let bottomConstraint = NSLayoutConstraint(item: progressView, attribute: .Bottom, relatedBy: .Equal, toItem: self, attribute: .Bottom, multiplier: 1.0, constant: 0.0)
+        let leadingConstraint = NSLayoutConstraint(item: progressView, attribute: .Leading, relatedBy: .Equal, toItem: progressContainerView, attribute: .Leading, multiplier: 1.0, constant: 0.0)
+        let topConstraint = NSLayoutConstraint(item: progressView, attribute: .Top, relatedBy: .Equal, toItem: progressContainerView, attribute: .Top, multiplier: 1.0, constant: 0.0)
+        let bottomConstraint = NSLayoutConstraint(item: progressView, attribute: .Bottom, relatedBy: .Equal, toItem: progressContainerView, attribute: .Bottom, multiplier: 1.0, constant: 0.0)
         
         progressViewWidthConstraint = NSLayoutConstraint(item: progressView, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1.0, constant: 0.0)
-        progressView.addConstraint(progressViewWidthConstraint)
         
-        self.addConstraints([leadingConstraint, topConstraint, bottomConstraint])
+        progressView.addConstraint(progressViewWidthConstraint)
+        progressContainerView.addConstraints([leadingConstraint, topConstraint, bottomConstraint])
     }
     
     // Add the rounded corner radius if needed
     private func addRoundedCorner() {
-        self.layer.cornerRadius = roundedCornerWidth
-        self.layer.masksToBounds = true
+        progressContainerView.layer.cornerRadius = roundedCornerWidth
+        progressContainerView.layer.masksToBounds = true
+        
+        progressView.layer.cornerRadius = roundedCornerWidth
+        progressView.layer.masksToBounds = true
     }
 }
