@@ -11,6 +11,7 @@ import UIKit
 class MainViewController: UIViewController {
     
     @IBOutlet weak var progressView: VPBarProgressView!
+    @IBOutlet weak var circularProgressView: VPCircularProgressView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,9 +26,15 @@ class MainViewController: UIViewController {
         
         for i in 0.stride(to: 10, by: 1) {
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64((1 + Double(i)) * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) {
-                self.progressView.moveProgressView(byPercentageCompletion: CGFloat(i + 1) * 10, animated: true)
+                self.progressView.moveProgressView(byPercentageCompletion: 10, animated: true)
             }
         }
+        
+        self.circularProgressView.progressColor = UIColor.greenColor()
+        self.circularProgressView.progressContainerColor = UIColor.redColor()
+        self.circularProgressView.animationDuration = 2
+        
+        self.circularProgressView.moveProgressView(byPercentageCompletion: 50, animated: true)
     }
 
     override func didReceiveMemoryWarning() {

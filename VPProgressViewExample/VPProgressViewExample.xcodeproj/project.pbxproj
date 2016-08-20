@@ -14,6 +14,7 @@
 		8B85079E1D4F3A5700F4DF77 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B85079D1D4F3A5700F4DF77 /* MainViewController.swift */; };
 		8B8507A21D4F3B7900F4DF77 /* VPProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8507A11D4F3B7900F4DF77 /* VPProgressView.swift */; };
 		96351A9A1D64D7CC009851E1 /* VPBarProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96351A991D64D7CC009851E1 /* VPBarProgressView.swift */; };
+		96351A9C1D64DAF5009851E1 /* VPCircularProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96351A9B1D64DAF5009851E1 /* VPCircularProgressView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		8B85079D1D4F3A5700F4DF77 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		8B8507A11D4F3B7900F4DF77 /* VPProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VPProgressView.swift; sourceTree = "<group>"; };
 		96351A991D64D7CC009851E1 /* VPBarProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VPBarProgressView.swift; sourceTree = "<group>"; };
+		96351A9B1D64DAF5009851E1 /* VPCircularProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VPCircularProgressView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +76,7 @@
 			children = (
 				8B8507A11D4F3B7900F4DF77 /* VPProgressView.swift */,
 				96351A991D64D7CC009851E1 /* VPBarProgressView.swift */,
+				96351A9B1D64DAF5009851E1 /* VPCircularProgressView.swift */,
 			);
 			name = VPProgressView;
 			path = ../../VPProgressView;
@@ -152,6 +155,7 @@
 			files = (
 				8B85078C1D4F39F400F4DF77 /* AppDelegate.swift in Sources */,
 				96351A9A1D64D7CC009851E1 /* VPBarProgressView.swift in Sources */,
+				96351A9C1D64DAF5009851E1 /* VPCircularProgressView.swift in Sources */,
 				8B85079E1D4F3A5700F4DF77 /* MainViewController.swift in Sources */,
 				8B8507A21D4F3B7900F4DF77 /* VPProgressView.swift in Sources */,
 			);

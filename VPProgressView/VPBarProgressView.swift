@@ -70,14 +70,10 @@ class VPBarProgressView: VPProgressView {
         progressContainerView.backgroundColor = progressContainerColor
     }
     
-    /// Change the widthConstraint to indicate the movement of progressView
-    override func moveProgressViewWidth(byPercentage percentage : CGFloat) {
-        // Convert the percentage to the needed width
-        progressViewWidthConstraint.constant = (progressContainerView.bounds.size.width * percentage) / 100
-    }
-    
     /// Helper function for moving the progressView with or without animation
     override func moveProgressView(percentage : CGFloat, animated : Bool) {
+        super.moveProgressView(percentage, animated: animated)
+        
         delegate?.willBeginProgress?()
         
         if animated {
@@ -156,5 +152,11 @@ extension VPPrivateFunctions {
         
         progressView.layer.cornerRadius = roundedCornerWidth
         progressView.layer.masksToBounds = true
+    }
+    
+    // Change the widthConstraint to indicate the movement of progressView
+    private func moveProgressViewWidth(byPercentage percentage : CGFloat) {
+        // Convert the percentage to the needed width
+        progressViewWidthConstraint.constant = (progressContainerView.bounds.size.width * percentage) / 100
     }
 }

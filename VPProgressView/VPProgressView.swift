@@ -51,7 +51,7 @@ class VPProgressView: UIView {
     
     //MARK: Public functions
     /// Sets the progressView by the given percentage. The percentage should be in between 0 and 100. If not, nothing will happen.
-    func setProgressViewCompletion(withPercentageCompletion percentage : CGFloat, animated : Bool) {
+    final func setProgressViewCompletion(withPercentageCompletion percentage : CGFloat, animated : Bool) {
         if isTargetPercentageValueInRange(forPercentage: percentage, isAdding: false) {
             moveProgressView(percentage, animated: animated)
         }
@@ -60,7 +60,7 @@ class VPProgressView: UIView {
     /// Move the progressView by the given percentage. Unlike the `setProgressViewCompletion(withPercentageCompletion percentage : CGFloat, animated : Bool)`, this moves by given percentage, whereas the former method sets the progress given percentage. The `byPercentage` should be such that
     ///
     /// 0 <= (`percentageCompletion` + `byPercentage`) <= 100
-    func moveProgressView(byPercentageCompletion byPercentage : CGFloat, animated : Bool) {
+    final func moveProgressView(byPercentageCompletion byPercentage : CGFloat, animated : Bool) {
         if isTargetPercentageValueInRange(forPercentage: byPercentage, isAdding: true) {
             moveProgressView(byPercentage + percentageCompletion, animated: animated)
         }
@@ -93,11 +93,8 @@ extension VPProgressView {
         // Do nothing
     }
     
-    func moveProgressViewWidth(byPercentage percentage : CGFloat) {
-        // Do nothing
-    }
-    
     func moveProgressView(percentage : CGFloat, animated : Bool) {
-        // Do nothing
+        // Update the percentage completion
+        percentageCompletion = percentage
     }
 }
