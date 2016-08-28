@@ -21,6 +21,9 @@ class VPCircularProgressView: VPProgressView {
     /// Defines the direction for the progressView. Defaults to clockWise
     var progressViewDirection = Direction.ClockWise
     
+    /// Defines the progressView line stroke width. Defaults to 5
+    var progressViewLineWidth : CGFloat = 5
+    
     // Variables for creating the progressView shape layer
     private var bezierPath = UIBezierPath()
     private let shapeLayer = CAShapeLayer()
@@ -52,7 +55,7 @@ class VPCircularProgressView: VPProgressView {
         shapeLayer.path = bezierPath.CGPath
         shapeLayer.strokeColor = progressColor.CGColor
         shapeLayer.fillColor = UIColor.clearColor().CGColor
-        shapeLayer.lineWidth = 5
+        shapeLayer.lineWidth = progressViewLineWidth
         
         // Animate the transition if needed
         if isAnimationNeeded {
