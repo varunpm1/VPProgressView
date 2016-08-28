@@ -32,9 +32,13 @@ class MainViewController: UIViewController {
         
         self.circularProgressView.progressColor = UIColor.greenColor()
         self.circularProgressView.progressContainerColor = UIColor.redColor()
-        self.circularProgressView.animationDuration = 2
+        self.circularProgressView.animationDuration = 0.5
         
-        self.circularProgressView.moveProgressView(byPercentageCompletion: 50, animated: true)
+        for i in 0.stride(to: 10, by: 1) {
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64((1 + Double(i)) * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) {
+                self.circularProgressView.moveProgressView(byPercentageCompletion: 10, animated: true)
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {
