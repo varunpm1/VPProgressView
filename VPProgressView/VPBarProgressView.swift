@@ -73,12 +73,16 @@ class VPBarProgressView: VPProgressView {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        /// Set the progressViewColor and containerViewColor
+        // Set the progressViewColor and containerViewColor
         progressView.backgroundColor = progressColor
         progressContainerView.backgroundColor = progressContainerColor
         
+        // Set the constraint values for progressBarSize
         progressViewContainerWidthConstraint.constant = progressBarSize.width
         progressViewContainerHeightConstraint.constant = progressBarSize.height
+        
+        // Set the frame for the label if needed.
+        moveProgressLabel(byPercentage: percentageCompletion)
     }
     
     /// Helper function for moving the progressView with or without animation
@@ -127,6 +131,7 @@ extension VPPrivateFunctions {
         if let progressLabelFont = progressLabelFont {
             progressLabel = UILabel(frame: CGRectZero)
             progressLabel!.font = progressLabelFont
+            progressLabel?.text = String(progressValues.minimum)
             
             self.addSubview(progressLabel!)
         }
@@ -172,5 +177,18 @@ extension VPPrivateFunctions {
     private func moveProgressViewWidth(byPercentage percentage : CGFloat) {
         // Convert the percentage to the needed width
         progressViewWidthConstraint.constant = (progressContainerView.bounds.size.width * percentage) / 100
+        
+        // Move the progress view by given percentage if needed
+        moveProgressLabel(byPercentage: percentage)
+    }
+    
+    private func moveProgressLabel(byPercentage percentage : CGFloat) {
+        if let progressLabel = progressLabel {
+            progressLabel.text = String(CGFloat(progressValues.minimum) + percentage * CGFloat(progressValues.maximum - progressValues.minimum) / 100)
+            progressLabel.sizeToFit()
+            
+            // Calculate the frame of the label based on the updated size and place it so that it's center aligned with progress view endpoint
+            progressLabel.center = CGPoint(x: CGRectGetMaxX(progressView.frame) + CGRectGetWidth(progressLabel.frame), y: CGRectGetMaxY(progressView.frame) + CGRectGetHeight(progressLabel.frame))
+        }
     }
 }

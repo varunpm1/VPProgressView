@@ -32,6 +32,9 @@ class VPProgressView: UIView {
     /// Denotes the percentage completion of the progressView (0-100 percent)
     var percentageCompletion : CGFloat = 0
     
+    /// Defines the minimum and maximum values to be used by the `progressViewLabel`. This value is only used if a progress label is needed.
+    var progressValues = (minimum: 0, maximum: 100)
+    
     // Initializers
     override init(frame: CGRect) {
         super.init(frame: frame)
