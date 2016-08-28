@@ -74,7 +74,7 @@ class VPProgressView: UIView {
     }
 }
 
-//MARK: Overridable functions to be overridden only bu subclasses. Do not call this method directly unless subclassed.
+//MARK: Overridable functions to be overridden only by subclasses. Do not call this method directly unless subclassed.
 extension VPProgressView {
     /// Overrided public functions
     func moveProgressView(percentage : CGFloat, animated : Bool) {

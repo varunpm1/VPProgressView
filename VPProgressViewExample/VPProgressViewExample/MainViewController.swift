@@ -22,7 +22,8 @@ class MainViewController: UIViewController {
         self.progressView.animationDuration = 0.7
         self.progressView.needsRoundedEdges = true
         self.progressView.roundedCornerWidth = 7
-        
+        self.progressView.progressBarSize = CGSize(width: 200, height: 30)
+        self.progressView.progressLabelFont = UIFont.systemFontOfSize(15)
         
         for i in 0.stride(to: 10, by: 1) {
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64((1 + Double(i)) * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) {
