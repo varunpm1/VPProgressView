@@ -61,12 +61,11 @@ class VPBarProgressView: VPProgressView {
         initProgressView()
     }
     
-    /// Set the progressViewColor and containerViewColor
-    override func setProgressViewColor() {
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        /// Set the progressViewColor and containerViewColor
         progressView.backgroundColor = progressColor
-    }
-    
-    override func setProgressContainerViewColor() {
         progressContainerView.backgroundColor = progressContainerColor
     }
     

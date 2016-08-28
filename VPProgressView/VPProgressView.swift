@@ -18,18 +18,10 @@ import UIKit
 
 class VPProgressView: UIView {
     /// Defines the color for progressView. Defaults to whiteColor.
-    var progressContainerColor : UIColor = UIColor.whiteColor() {
-        didSet {
-            setProgressContainerViewColor()
-        }
-    }
+    var progressContainerColor : UIColor = UIColor.whiteColor()
     
     /// Defines the color for progressView. Defaults to blackColor.
-    var progressColor : UIColor = UIColor.blackColor() {
-        didSet {
-            setProgressViewColor()
-        }
-    }
+    var progressColor : UIColor = UIColor.blackColor()
     
     /// Defines the duration for animation. This will not have effect if in moveProgressView(_:, _:) animated is set to false. Defaults to 0.5
     var animationDuration = 0.5
@@ -85,14 +77,6 @@ class VPProgressView: UIView {
 //MARK: Overridable functions to be overridden only bu subclasses. Do not call this method directly unless subclassed.
 extension VPProgressView {
     /// Overrided public functions
-    func setProgressContainerViewColor() {
-        // Do nothing
-    }
-    
-    func setProgressViewColor() {
-        // Do nothing
-    }
-    
     func moveProgressView(percentage : CGFloat, animated : Bool) {
         // Update the percentage completion
         percentageCompletion = percentage
