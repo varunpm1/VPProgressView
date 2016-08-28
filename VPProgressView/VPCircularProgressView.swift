@@ -58,7 +58,7 @@ class VPCircularProgressView: VPProgressView {
         if isAnimationNeeded {
             let animation = CABasicAnimation(keyPath: "strokeEnd")
             animation.duration = animationDuration
-            animation.fromValue = currentCompletionPercentage / 100
+            animation.fromValue = currentCompletionPercentage / percentageCompletion // Calculate the start point for the animation using the previously set progress completion value
             animation.toValue = 1
             animation.removedOnCompletion = true
             animation.delegate = self
