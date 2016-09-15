@@ -47,6 +47,12 @@ class VPCircularProgressView: VPProgressView {
         initProgressViewLayer()
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        alignProgressDisplayLabel()
+    }
+    
     // Draw the layer with/without animation
     override func drawRect(rect: CGRect) {
         // Create our arc, with the correct angles
@@ -70,6 +76,9 @@ class VPCircularProgressView: VPProgressView {
         }
         
         currentCompletionPercentage = percentageCompletion
+        
+        // Update the percentage completion
+        updateProgressData(currentCompletionPercentage)
     }
     
     // Init the layer for progressView layer
@@ -87,6 +96,21 @@ class VPCircularProgressView: VPProgressView {
         let finalPercentageValue = (progressViewDirection == .ClockWise) ? percentage : (100 - percentage)
         
         return (((2 * piValue) * finalPercentageValue / 100) - piValue)
+    }
+    
+    //TODO: UILabel placing customization
+    // Place the UILabel at the center of the view
+    private func alignProgressDisplayLabel() {
+        progressLabel?.center = CGPoint(x: self.bounds.width / 2, y: self.bounds.height / 2)
+    }
+    
+    //TODO: UILabel text change animations
+    // Update the UILabel text placed in center
+    private func updateProgressData(percentage : CGFloat) {
+        guard let progressLabel = progressLabel else { return }
+        
+        progressLabel.text = String(CGFloat(progressExtremeValues.minimum) + percentage * CGFloat(progressExtremeValues.maximum - progressExtremeValues.minimum) / 100)
+        progressLabel.sizeToFit()
     }
     
     /// Overridable functions

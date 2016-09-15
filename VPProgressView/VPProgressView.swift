@@ -33,7 +33,17 @@ class VPProgressView: UIView {
     var percentageCompletion : CGFloat = 0
     
     /// Defines the minimum and maximum values to be used by the `progressViewLabel`. This value is only used if a progress label is needed.
-    var progressValues = (minimum: 0, maximum: 100)
+    var progressExtremeValues = (minimum: 0, maximum: 100)
+    
+    /// Optional label font for displaying the percentage completion. Defaults to nil.
+    var progressLabelFont : UIFont? {
+        didSet {
+            addProgressLabel()
+        }
+    }
+    
+    // UILabel instance for holding the progress value. Optional value. Defaults to nil
+    private (set) var progressLabel : UILabel?
     
     // Initializers
     override init(frame: CGRect) {
@@ -83,5 +93,16 @@ extension VPProgressView {
     func moveProgressView(percentage : CGFloat, animated : Bool) {
         // Update the percentage completion
         percentageCompletion = percentage
+    }
+    
+    // Add the progressLabel
+    private func addProgressLabel() {
+        if let progressLabelFont = progressLabelFont {
+            progressLabel = UILabel(frame: CGRectZero)
+            progressLabel!.font = progressLabelFont
+            progressLabel?.text = String(progressExtremeValues.minimum)
+            
+            self.addSubview(progressLabel!)
+        }
     }
 }

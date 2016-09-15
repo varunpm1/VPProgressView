@@ -24,7 +24,7 @@ class MainViewController: UIViewController {
         self.progressView.roundedCornerWidth = 7
         self.progressView.progressBarSize = CGSize(width: 200, height: 30)
         self.progressView.progressLabelFont = UIFont.systemFontOfSize(15)
-        self.progressView.progressValues = (100, 200)
+        self.progressView.progressExtremeValues = (100, 200)
         
         for i in 0.stride(to: 10, by: 1) {
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64((1 + Double(i)) * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) {
@@ -35,6 +35,8 @@ class MainViewController: UIViewController {
         self.circularProgressView.progressColor = UIColor.greenColor()
         self.circularProgressView.progressContainerColor = UIColor.redColor()
         self.circularProgressView.animationDuration = 0.5
+        self.circularProgressView.progressExtremeValues = (50, 60)
+        self.circularProgressView.progressLabelFont = UIFont.systemFontOfSize(15)
         
         for i in 0.stride(to: 10, by: 1) {
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64((1 + Double(i)) * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) {

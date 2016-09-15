@@ -32,13 +32,6 @@ class VPBarProgressView: VPProgressView {
     /// Defines the size needed for the `progressBarView`. Defaults to (150, 30). Centered horizontally center.
     var progressBarSize : CGSize = CGSizeMake(150, 30)
     
-    /// Optional label font for displaying the percentage completion. Defaults to nil.
-    var progressLabelFont : UIFont? {
-        didSet {
-            addProgressLabel()
-        }
-    }
-    
     // prgressView containerView
     private var progressContainerView : UIView!
     
@@ -53,9 +46,6 @@ class VPBarProgressView: VPProgressView {
     
     // Height constraint to set the progressContainerView
     private var progressViewContainerHeightConstraint : NSLayoutConstraint!
-    
-    // UILabel instance for holding the progress value. Optional value. Defaults to nil
-    private var progressLabel : UILabel?
     
     // Initializers
     override init(frame: CGRect) {
@@ -126,17 +116,6 @@ extension VPPrivateFunctions {
         self.backgroundColor = UIColor.clearColor()
     }
     
-    // Add the progressLabel
-    private func addProgressLabel() {
-        if let progressLabelFont = progressLabelFont {
-            progressLabel = UILabel(frame: CGRectZero)
-            progressLabel!.font = progressLabelFont
-            progressLabel?.text = String(progressValues.minimum)
-            
-            self.addSubview(progressLabel!)
-        }
-    }
-    
     // Add the necessary constraints for the progressView and containerView
     private func addConstraintsForView(view : UIView, parentView : UIView) {
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -184,7 +163,7 @@ extension VPPrivateFunctions {
     
     private func moveProgressLabel(byPercentage percentage : CGFloat) {
         if let progressLabel = progressLabel {
-            progressLabel.text = String(CGFloat(progressValues.minimum) + percentage * CGFloat(progressValues.maximum - progressValues.minimum) / 100)
+            progressLabel.text = String(CGFloat(progressExtremeValues.minimum) + percentage * CGFloat(progressExtremeValues.maximum - progressExtremeValues.minimum) / 100)
             progressLabel.sizeToFit()
             
             // Calculate the frame of the label based on the updated size and place it so that it's center aligned with progress view endpoint
