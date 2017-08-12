@@ -32,18 +32,18 @@ import UIKit
 
 @objc protocol VPProgressViewProtocol : class {
     /// Called when progressView is about to begin animation
-    optional func willBeginProgress()
+    @objc optional func willBeginProgress()
     
     /// Called when progressView has completed the animation
-    optional func didEndProgress()
+    @objc optional func didEndProgress()
 }
 
 class VPProgressView: UIView {
     /// Defines the color for progressView. Defaults to whiteColor.
-    var progressContainerColor : UIColor = UIColor.whiteColor()
+    var progressContainerColor : UIColor = UIColor.white
     
     /// Defines the color for progressView. Defaults to blackColor.
-    var progressColor : UIColor = UIColor.blackColor()
+    var progressColor : UIColor = UIColor.black
     
     /// Defines the duration for animation. This will not have effect if in moveProgressView(_:, _:) animated is set to false. Defaults to 0.5
     var animationDuration = 0.5
@@ -65,7 +65,7 @@ class VPProgressView: UIView {
     }
     
     // UILabel instance for holding the progress value. Optional value. Defaults to nil
-    private (set) var progressLabel : UILabel?
+    fileprivate (set) var progressLabel : UILabel?
     
     // Initializers
     override init(frame: CGRect) {
@@ -95,7 +95,7 @@ class VPProgressView: UIView {
     
     //MARK: Private functions
     // Check if the target percentage of progressView is within valid range
-    private func isTargetPercentageValueInRange(forPercentage percentage : CGFloat, isAdding : Bool) -> Bool {
+    fileprivate func isTargetPercentageValueInRange(forPercentage percentage : CGFloat, isAdding : Bool) -> Bool {
         var targetPercentage : CGFloat = 0
         
         if isAdding {
@@ -112,15 +112,15 @@ class VPProgressView: UIView {
 //MARK: Overridable functions to be overridden only by subclasses. Do not call this method directly unless subclassed.
 extension VPProgressView {
     /// Overrided public functions
-    func moveProgressView(percentage : CGFloat, animated : Bool) {
+    func moveProgressView(_ percentage : CGFloat, animated : Bool) {
         // Update the percentage completion
         percentageCompletion = percentage
     }
     
     // Add the progressLabel
-    private func addProgressLabel() {
+    fileprivate func addProgressLabel() {
         if let progressLabelFont = progressLabelFont {
-            progressLabel = UILabel(frame: CGRectZero)
+            progressLabel = UILabel(frame: CGRect.zero)
             progressLabel!.font = progressLabelFont
             progressLabel?.text = String(progressExtremeValues.minimum)
             

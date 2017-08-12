@@ -52,22 +52,22 @@ class VPBarProgressView: VPProgressView {
     }
     
     /// Defines the size needed for the `progressBarView`. Defaults to (150, 30). Centered horizontally center.
-    var progressBarSize : CGSize = CGSizeMake(150, 30)
+    var progressBarSize : CGSize = CGSize(width: 150, height: 30)
     
     // prgressView containerView
-    private var progressContainerView : UIView!
+    fileprivate var progressContainerView : UIView!
     
     // progressView Instance
-    private var progressView : UIView!
+    fileprivate var progressView : UIView!
     
     // Width constraint to move the progressView
-    private var progressViewWidthConstraint : NSLayoutConstraint!
+    fileprivate var progressViewWidthConstraint : NSLayoutConstraint!
     
     // Width constraint to set the progressContainerView
-    private var progressViewContainerWidthConstraint : NSLayoutConstraint!
+    fileprivate var progressViewContainerWidthConstraint : NSLayoutConstraint!
     
     // Height constraint to set the progressContainerView
-    private var progressViewContainerHeightConstraint : NSLayoutConstraint!
+    fileprivate var progressViewContainerHeightConstraint : NSLayoutConstraint!
     
     // Initializers
     override init(frame: CGRect) {
@@ -98,13 +98,13 @@ class VPBarProgressView: VPProgressView {
     }
     
     /// Helper function for moving the progressView with or without animation
-    override func moveProgressView(percentage : CGFloat, animated : Bool) {
+    override func moveProgressView(_ percentage : CGFloat, animated : Bool) {
         super.moveProgressView(percentage, animated: animated)
         
         delegate?.willBeginProgress?()
         
         if animated {
-            UIView.animateWithDuration(animationDuration, animations: {
+            UIView.animate(withDuration: animationDuration, animations: {
                 self.moveProgressViewWidth(byPercentage: percentage)
                 self.layoutIfNeeded()
                 }, completion: { (success) in
@@ -122,11 +122,11 @@ class VPBarProgressView: VPProgressView {
 extension VPPrivateFunctions {
     //MARK: Private Helper functions
     // Add the progressView to the view
-    private func initProgressView() {
-        progressContainerView = UIView(frame: CGRectZero)
+    fileprivate func initProgressView() {
+        progressContainerView = UIView(frame: CGRect.zero)
         progressContainerView.backgroundColor = progressContainerColor
         
-        progressView = UIView(frame: CGRectZero)
+        progressView = UIView(frame: CGRect.zero)
         progressView.backgroundColor = progressColor
         
         addSubview(progressContainerView)
@@ -135,38 +135,38 @@ extension VPPrivateFunctions {
         addConstraintsForView(progressContainerView, parentView: self)
         addConstraintForProgressView()
         
-        self.backgroundColor = UIColor.clearColor()
+        self.backgroundColor = UIColor.clear
     }
     
     // Add the necessary constraints for the progressView and containerView
-    private func addConstraintsForView(view : UIView, parentView : UIView) {
+    fileprivate func addConstraintsForView(_ view : UIView, parentView : UIView) {
         view.translatesAutoresizingMaskIntoConstraints = false
         
-        let topConstraint = NSLayoutConstraint(item: view, attribute: .Top, relatedBy: .Equal, toItem: parentView, attribute: .Top, multiplier: 1.0, constant: 0.0)
-        let centerXConstraint = NSLayoutConstraint(item: view, attribute: .CenterX, relatedBy: .Equal, toItem: parentView, attribute: .CenterX, multiplier: 1.0, constant: 0.0)
+        let topConstraint = NSLayoutConstraint(item: view, attribute: .top, relatedBy: .equal, toItem: parentView, attribute: .top, multiplier: 1.0, constant: 0.0)
+        let centerXConstraint = NSLayoutConstraint(item: view, attribute: .centerX, relatedBy: .equal, toItem: parentView, attribute: .centerX, multiplier: 1.0, constant: 0.0)
         
-        progressViewContainerWidthConstraint = NSLayoutConstraint(item: view, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1.0, constant: 0.0)
-        progressViewContainerHeightConstraint = NSLayoutConstraint(item: view, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1.0, constant: 0.0)
+        progressViewContainerWidthConstraint = NSLayoutConstraint(item: view, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 0.0)
+        progressViewContainerHeightConstraint = NSLayoutConstraint(item: view, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 0.0)
         
         parentView.addConstraints([topConstraint, centerXConstraint])
         view.addConstraints([progressViewContainerWidthConstraint, progressViewContainerHeightConstraint])
     }
     
-    private func addConstraintForProgressView() {
+    fileprivate func addConstraintForProgressView() {
         progressView.translatesAutoresizingMaskIntoConstraints = false
         
-        let leadingConstraint = NSLayoutConstraint(item: progressView, attribute: .Leading, relatedBy: .Equal, toItem: progressContainerView, attribute: .Leading, multiplier: 1.0, constant: 0.0)
-        let topConstraint = NSLayoutConstraint(item: progressView, attribute: .Top, relatedBy: .Equal, toItem: progressContainerView, attribute: .Top, multiplier: 1.0, constant: 0.0)
-        let bottomConstraint = NSLayoutConstraint(item: progressView, attribute: .Bottom, relatedBy: .Equal, toItem: progressContainerView, attribute: .Bottom, multiplier: 1.0, constant: 0.0)
+        let leadingConstraint = NSLayoutConstraint(item: progressView, attribute: .leading, relatedBy: .equal, toItem: progressContainerView, attribute: .leading, multiplier: 1.0, constant: 0.0)
+        let topConstraint = NSLayoutConstraint(item: progressView, attribute: .top, relatedBy: .equal, toItem: progressContainerView, attribute: .top, multiplier: 1.0, constant: 0.0)
+        let bottomConstraint = NSLayoutConstraint(item: progressView, attribute: .bottom, relatedBy: .equal, toItem: progressContainerView, attribute: .bottom, multiplier: 1.0, constant: 0.0)
         
-        progressViewWidthConstraint = NSLayoutConstraint(item: progressView, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1.0, constant: 0.0)
+        progressViewWidthConstraint = NSLayoutConstraint(item: progressView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 0.0)
         
         progressView.addConstraint(progressViewWidthConstraint)
         progressContainerView.addConstraints([leadingConstraint, topConstraint, bottomConstraint])
     }
     
     // Add the rounded corner radius if needed
-    private func addRoundedCorner() {
+    fileprivate func addRoundedCorner() {
         progressContainerView.layer.cornerRadius = roundedCornerWidth
         progressContainerView.layer.masksToBounds = true
         
@@ -175,7 +175,7 @@ extension VPPrivateFunctions {
     }
     
     // Change the widthConstraint to indicate the movement of progressView
-    private func moveProgressViewWidth(byPercentage percentage : CGFloat) {
+    fileprivate func moveProgressViewWidth(byPercentage percentage : CGFloat) {
         // Convert the percentage to the needed width
         progressViewWidthConstraint.constant = (progressContainerView.bounds.size.width * percentage) / 100
         
@@ -183,13 +183,13 @@ extension VPPrivateFunctions {
         moveProgressLabel(byPercentage: percentage)
     }
     
-    private func moveProgressLabel(byPercentage percentage : CGFloat) {
+    fileprivate func moveProgressLabel(byPercentage percentage : CGFloat) {
         if let progressLabel = progressLabel {
-            progressLabel.text = String(CGFloat(progressExtremeValues.minimum) + percentage * CGFloat(progressExtremeValues.maximum - progressExtremeValues.minimum) / 100)
+            progressLabel.text = String(describing: CGFloat(progressExtremeValues.minimum) + percentage * CGFloat(progressExtremeValues.maximum - progressExtremeValues.minimum) / 100)
             progressLabel.sizeToFit()
             
             // Calculate the frame of the label based on the updated size and place it so that it's center aligned with progress view endpoint
-            progressLabel.center = CGPoint(x: CGRectGetMaxX(progressView.frame) + CGRectGetWidth(progressLabel.frame), y: CGRectGetMaxY(progressView.frame) + CGRectGetHeight(progressLabel.frame))
+            progressLabel.center = CGPoint(x: progressView.frame.maxX + progressLabel.frame.width, y: progressView.frame.maxY + progressLabel.frame.height)
         }
     }
 }
